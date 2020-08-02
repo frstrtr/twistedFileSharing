@@ -2,16 +2,16 @@ import os
 from twisted.web.server import Site
 from twisted.internet import reactor
 from twisted.web.static import File
-from twisted.cred.portal import Portal
-from twisted.cred.checkers import FilePasswordDB
-from twisted.web.guard import HTTPAuthSessionWrapper, BasicCredentialFactory
+from twisted.cred.portal import Portal # The point of integration of application and authentication.
+from twisted.cred.checkers import FilePasswordDB # Basic credential checkers
+from twisted.web.guard import HTTPAuthSessionWrapper, BasicCredentialFactory # Resource traversal integration with L{twisted.cred} to allow for authentication and authorization of HTTP requests.
 
 from zope.interface import implements
-from twisted.web.resource import IResource
-from twisted.cred.portal import IRealm
+from twisted.web.resource import IResource # A web resource.
+from twisted.cred.portal import IRealm # The point of integration of application and authentication.
 
 class PublicHTMLRealm(object):
-    implements(IRealm)
+    implements(IRealm) #The realm connects application-specific objects to the authentication system.
     def __init__(self, root):
         self.root = root
     
